@@ -6,13 +6,12 @@ class ProfilePage extends StatelessWidget {
 
   final String userName = 'I Ketut Gunawan, S.Kom, M.T.I.';
   final String role = 'Senior Backend Engginer & Dosen';
-  
-  //bug 1: menambahkan , dibelakang string sukerindo
+
   final List<String> experiences = [
     'Senior Backend Engineer - EDC Bank DKI',
     'Backend & System Architect - Secure Payment EDC',
     'Lead Developer - Aplikasi Sekurindo',
-    'Backend Engineer - Pengembangan Sistem E-money', 
+    'Backend Engineer - Pengembangan Sistem E-money',
   ];
 
   @override
@@ -50,19 +49,11 @@ class ProfilePage extends StatelessWidget {
             ),
             const Divider(),
 
-            // bug 2: membungkus listView.builder dengan expanded
             Expanded(
               child: ListView.builder(
                 itemCount: experiences.length,
                 itemBuilder: (context, index) {
-                  return Card(
-                    elevation: 2,
-                    margin: const EdgeInsets.symmetric(vertical: 6),
-                    child: ListTile(
-                      leading: const Icon(Icons.work, color: Colors.blueAccent),
-                      title: Text(experiences[index]),
-                    ),
-                  );
+                  return ExperienceCard(experience: experiences[index]);
                 },
               ),
             ),
@@ -131,28 +122,77 @@ class ProfileStats extends StatelessWidget {
         children: [
           Column(
             children: [
-              const Text('15', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
+              const Text(
+                '15',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueAccent,
+                ),
+              ),
               const SizedBox(height: 4),
-              Text('Proyek', style: TextStyle(fontSize: 14, color: Colors.grey[600])),
+              Text(
+                'Proyek',
+                style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+              ),
             ],
           ),
-          const SizedBox(width: 24), 
+          const SizedBox(width: 24),
           Column(
             children: [
-              const Text('1.2K', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
+              const Text(
+                '1.2K',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueAccent,
+                ),
+              ),
               const SizedBox(height: 4),
-              Text('Followers', style: TextStyle(fontSize: 14, color: Colors.grey[600])),
+              Text(
+                'Followers',
+                style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+              ),
             ],
           ),
-          const SizedBox(width: 24), 
+          const SizedBox(width: 24),
           Column(
             children: [
-              const Text('42', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blueAccent)),
+              const Text(
+                '42',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueAccent,
+                ),
+              ),
               const SizedBox(height: 4),
-              Text('Following', style: TextStyle(fontSize: 14, color: Colors.grey[600])),
+              Text(
+                'Following',
+                style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+              ),
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+//Custom Widget ExprerienceCard
+class ExperienceCard extends StatelessWidget {
+  final String experience;
+
+  const ExperienceCard({super.key, required this.experience});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 2,
+      margin: const EdgeInsets.symmetric(vertical: 6),
+      child: ListTile(
+        leading: const Icon(Icons.work, color: Colors.blueAccent),
+        title: Text(experience),
       ),
     );
   }

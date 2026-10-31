@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  // Hapus const di depan ProfilePage karena punya variabel List
+  ProfilePage({super.key});
 
   final String userName = 'I Ketut Gunawan, S.Kom, M.T.I.';
   final String role = 'Senior Backend Engginer & Dosen';
+  
+  //bug 1: menambahkan , dibelakang string sukerindo
+  final List<String> experiences = [
+    'Senior Backend Engineer - EDC Bank DKI',
+    'Backend & System Architect - Secure Payment EDC',
+    'Lead Developer - Aplikasi Sekurindo',
+    'Backend Engineer - Pengembangan Sistem E-money', 
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +40,32 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             const ProfileStats(),
+
+            const Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Pengalaman Kerja',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const Divider(),
+
+            // bug 2: membungkus listView.builder dengan expanded
+            Expanded(
+              child: ListView.builder(
+                itemCount: experiences.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    elevation: 2,
+                    margin: const EdgeInsets.symmetric(vertical: 6),
+                    child: ListTile(
+                      leading: const Icon(Icons.work, color: Colors.blueAccent),
+                      title: Text(experiences[index]),
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),

@@ -1,55 +1,51 @@
 import 'package:flutter/material.dart';
 
-// 1. Class utama sekarang menjadi StatefulWidget
-class ProfilePage extends StatefulWidget {
-  // Karena datanya sudah dipindah ke State, ProfilePage bisa menggunakan 'const' lagi
+class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
-}
-
-// 2. Class State ini adalah tempat menyimpan data yang bisa berubah/dinamis
-class _ProfilePageState extends State<ProfilePage> {
-  // Variabel userName tidak menggunakan 'final' karena nilainya nanti akan diubah
-  String userName = 'I Ketut Gunawan, S.Kom, M.T.I.';
-  final String role = 'Senior Backend Engineer & Dosen';
-
-  final List<String> experiences = [
-    'Senior Backend Engineer - EDC Bank DKI',
-    'Backend & System Architect - Secure Payment EDC',
-    'Lead Developer - Aplikasi Sekurindo',
-    'Backend Engineer - Pengembangan Sistem E-money',
-  ];
-
-  @override
   Widget build(BuildContext context) {
+    String userName = 'Rinda Danar Madanti';
+    String role = 'Mahasiswa Software Engineering';
+
+    final List<String> experiences = [
+      'VeloTask - Manajemen Deadline Tugas',
+      'Product Manager',
+      'Backend Engineer',
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profil Pengguna'),
         centerTitle: true,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: const Color.fromARGB(255, 16, 43, 116),
         foregroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            //memanggil widge yg sudah dipisah
             const ProfileAvatar(),
             const SizedBox(height: 16),
-
             ProfileInfo(name: userName, role: role),
             const SizedBox(height: 24),
+            
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Fitur edit belum aktif pada modul statis'),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              },
               icon: const Icon(Icons.edit),
               label: const Text('Edit Profil'),
             ),
+            
             const SizedBox(height: 24),
             const ProfileStats(),
             const SizedBox(height: 24),
-
             const Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -58,7 +54,6 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             const Divider(),
-
             Expanded(
               child: ListView.builder(
                 itemCount: experiences.length,

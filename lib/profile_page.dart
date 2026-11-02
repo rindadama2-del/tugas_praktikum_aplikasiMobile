@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatelessWidget {
-  // Hapus const di depan ProfilePage karena punya variabel List
-  ProfilePage({super.key});
+// 1. Class utama sekarang menjadi StatefulWidget
+class ProfilePage extends StatefulWidget {
+  // Karena datanya sudah dipindah ke State, ProfilePage bisa menggunakan 'const' lagi
+  const ProfilePage({super.key});
 
-  final String userName = 'I Ketut Gunawan, S.Kom, M.T.I.';
-  final String role = 'Senior Backend Engginer & Dosen';
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+// 2. Class State ini adalah tempat menyimpan data yang bisa berubah/dinamis
+class _ProfilePageState extends State<ProfilePage> {
+  // Variabel userName tidak menggunakan 'final' karena nilainya nanti akan diubah
+  String userName = 'I Ketut Gunawan, S.Kom, M.T.I.';
+  final String role = 'Senior Backend Engineer & Dosen';
 
   final List<String> experiences = [
     'Senior Backend Engineer - EDC Bank DKI',
@@ -30,6 +38,7 @@ class ProfilePage extends StatelessWidget {
             //memanggil widge yg sudah dipisah
             const ProfileAvatar(),
             const SizedBox(height: 16),
+
             ProfileInfo(name: userName, role: role),
             const SizedBox(height: 24),
             ElevatedButton.icon(
@@ -39,6 +48,7 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             const ProfileStats(),
+            const SizedBox(height: 24),
 
             const Align(
               alignment: Alignment.centerLeft,
